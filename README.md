@@ -23,12 +23,21 @@
 
   For every `model.py` there's a corresponding `trainer.py`
   
-  Simply run:
+  Simply navigate to a directory with any model (e.g. baseline) and run:
   ```	
     $ python3 trainer.py
   ```
   and you will train the model and evaluate it using the test data.
 
+## Available Models
+  * oracle
+  * baseline
+  * glove_one_vs_many
+  * lda_one_vs_many
+  * glove_lda_one_vs_many
+  * cnn
+
+## CNN Trainer
   CNN trainer offers flags where you can chose to restore from a previous run, and whether to
   train, test, and/or predict.
 
