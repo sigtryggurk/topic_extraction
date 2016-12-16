@@ -24,4 +24,5 @@
   For every `model.py` there's a corresponding `trainer.py`
   Simply run:
 	`$ python3 trainer.py` (CNN also has some command line flags)
+  
   and you will train the model and evaluate it using the test data 
