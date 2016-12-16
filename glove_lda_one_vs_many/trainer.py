@@ -25,8 +25,6 @@ with open(cfg.TEST_DATA_PATH,'r') as dataFile:
   for summary,cats in reader:
     summaries.append(summary)
     targets.append(tuple(literal_eval(cats)))
-    limit -= 1
-
 
 targets = classifier.mlb.transform(targets)    
 predicted = classifier.predict(summaries)
