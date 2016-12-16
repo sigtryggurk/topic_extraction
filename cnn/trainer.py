@@ -23,7 +23,7 @@ import config as cfg
 
 def train(model=None, tokenizer=None):
   # Load the training data
-  texts, targets = loadTextsAndLabels(cfg.TRAIN_DATA_PATH, limit=1000)
+  texts, targets = loadTextsAndLabels(cfg.TRAIN_DATA_PATH)
   
   # Vectorize the text samples into a 2D integer tensor
   if tokenizer == None:
@@ -57,7 +57,7 @@ def train(model=None, tokenizer=None):
 def test(model, tokenizer):
   print("Evaluating test data")
   # Load the test data
-  texts, targets = loadTextsAndLabels(cfg.TEST_DATA_PATH, limit=1000)
+  texts, targets = loadTextsAndLabels(cfg.TEST_DATA_PATH)
   
   # Vectorize the text samples into a 2D integer tensor
   inputs = tokenizer.texts_to_sequences(texts)

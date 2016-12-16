@@ -27,13 +27,9 @@ class Classifier(object):
     with open(cfg.TRAIN_DATA_PATH, "r") as dataFile:
       reader = csv.reader(dataFile)
 
-      limit = 10000
       for summary,cats in reader:
-        if limit == 0:
-          break
         summaries.append(summary)
         targets.append(tuple(literal_eval(cats)))
-        limit -= 1
       
     print('Number of summaries: (%d)' % (len(summaries)))
 
