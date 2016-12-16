@@ -1,0 +1,6 @@
+python>=3.5
+keras=1.1.2
+scipy==0.18.1
+sklearn==0.0
+numpy==1.11.2
+wikitools==1.3
