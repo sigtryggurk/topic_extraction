@@ -22,7 +22,19 @@
 # Training a Model
 
   For every `model.py` there's a corresponding `trainer.py`
-  Simply run:
-	`$ python3 trainer.py` (CNN also has some command line flags)
   
-  and you will train the model and evaluate it using the test data 
+  Simply run:
+  ```	
+    $ python3 trainer.py
+  ```
+  and you will train the model and evaluate it using the test data.
+
+  CNN trainer offers flags where you can chose to restore from a previous run, and whether to
+  train, test, and/or predict.
+
+  One example is:
+  ```
+    $ cd cnn
+    $ python3 trainer.py --restore latest --no-train --no-test --predict
+  ```
+  Which uses the latest trained model, predicts on a subset of the test data and prints out the predictions 

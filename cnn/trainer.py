@@ -67,11 +67,12 @@ def test(model, tokenizer):
   
   return model.evaluate(inputs, targets, batch_size=cfg.BATCH_SIZE)
 
-def predict(model, tokenizer):
+# Generate predictions for a subset of test data
+def predict(model, tokenizer, limit=1000):
   print("Predicting on test data")
   # Load the test data
-  texts, targets = loadTextsAndLabels(cfg.TEST_DATA_PATH)
-  
+  texts, targets = loadTextsAndLabels(cfg.TEST_DATA_PATH, limit=limit)
+ 
   # Vectorize the text samples into a 2D integer tensor
   inputs = tokenizer.texts_to_sequences(texts)
   
@@ -79,11 +80,17 @@ def predict(model, tokenizer):
   inputs = pad_sequences(inputs, maxlen=cfg.MAX_SEQUENCE_LENGTH)
  
   preds = np.rint(model.predict(inputs, batch_size=cfg.BATCH_SIZE))
-  correct = 0
-  for i, target in enumerate(targets):
-    if np.equal(preds[i], target):
-      correct += 1
-  print(correct,len(targets))
+
+  inv_targets = cfg.LABELER.inverse_transform(np.array(targets))
+  inv_preds = cfg.LABELER.inverse_transform(preds)
+
+  with open("predictions.txt", "w") as predFile:
+    for i, target in enumerate(targets):
+      result = "CORRECT" if np.array_equal(preds[i], target) else "INCORRECT"
+      print("="*10, file=predFile)
+      print("%s, Categories: %s - Predicted: %s" % (result, str(inv_targets[i]), str(inv_preds[i])), file=predFile)
+      print("Text:\n%s" % (texts[i]), file=predFile)
+    print("Predictions printed to file://%s" % os.path.realpath(predFile.name))
 
 if __name__ == '__main__':
   parser = argparse.ArgumentParser()
